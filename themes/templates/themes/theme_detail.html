@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-4">
+  <h2 class="text-center mb-4" style="color:#2D6A4F;">{{ theme.name }} Products</h2>
+  <div class="row">
+    {% for product in theme.products.all %}
+      <div class="col-6 col-md-4 col-lg-3 d-flex align-items-stretch mb-4">
+        <div class="product-card w-100">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+          {% endif %}
+          <h3 style="color: #234F1E;">{{ product.name }}</h3>
+          <p class="price">${{ product.price }}</p>
+          <p class="description">{{ product.description|truncatewords:20 }}</p>
+          <div class="d-grid gap-2">
+            <form method="post" action="{% url 'cart:add_to_cart' product.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary w-100">Add to Cart</button>
+            </form>
+            <a href="{% url 'product_detail' product.slug %}" class="btn btn-outline-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

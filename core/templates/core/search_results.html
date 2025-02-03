@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="container my-4">
+  <h2 class="text-center mb-4" style="color:#2D6A4F;">
+    Search Results for: <em>{{ query }}</em>
+  </h2>
+
+  {% if not query %}
+    <p class="text-center search-info">Please enter a keyword.</p>
+  {% else %}
+    {% if not product_results and not category_results and not theme_results %}
+      <p class="text-center search-info">No results found.</p>
+    {% else %}
+      {% if category_results %}
+        <div class="search-result-block mb-5">
+          <h3 class="text-center mb-4" style="color:#2D6A4F;">Categories</h3>
+          <div class="row justify-content-center">
+            {% for cat in category_results %}
+              <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4 d-flex justify-content-center">
+                <div class="category-circle" style="background-color: {{ cat.background_color }};">
+                  {% if cat.image %}
+                    <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+                  {% endif %}
+                  <a href="{% url 'product_list_by_category' category_slug=cat.slug %}">{{ cat.name }}</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if theme_results %}
+        <div class="search-result-block mb-5">
+          <h3 class="text-center mb-4" style="color:#2D6A4F;">Themes</h3>
+          <div class="row justify-content-center">
+            {% for theme in theme_results %}
+              <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4 d-flex justify-content-center">
+                <div class="theme-circle">
+                  {% if theme.image %}
+                    <img src="{{ theme.image.url }}" alt="{{ theme.name }}">
+                  {% endif %}
+                  <a href="{% url 'theme_detail' theme.slug %}">{{ theme.name }}</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if product_results %}
+        <div class="search-result-block">
+          <h3 class="text-center mb-4" style="color:#2D6A4F;">Products</h3>
+          <div class="row">
+            {% for product in product_results %}
+              <div class="col-6 col-md-4 col-lg-3 d-flex align-items-stretch mb-4">
+                <div class="product-card w-100">
+                  {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+                  {% endif %}
+                  <h3>{{ product.name }}</h3>
+                  <p class="price">${{ product.price }}</p>
+                  <p class="description">{{ product.description|truncatewords:20 }}</p>
+                  <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary">View Details</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

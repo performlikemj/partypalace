@@ -1,0 +1,14 @@
+/* Make the answer field taller in the admin */
+.field-answer textarea {
+    min-height: 150px;
+}
+
+/* Style the order field to be more compact */
+.field-order input {
+    width: 60px;
+}
+
+/* Add some spacing between questions in the changelist */
+#changelist .field-question {
+    max-width: 500px;
+} 

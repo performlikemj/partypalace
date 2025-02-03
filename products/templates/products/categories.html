@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="container my-4">
+  <h2 class="text-center mb-4" style="color:#2D6A4F;">All Categories</h2>
+  
+  <div class="row justify-content-center">
+    {% for cat in categories %}
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4 d-flex justify-content-center">
+        <div class="category-circle" style="background-color: {{ cat.background_color }};">
+          {% if cat.image %}
+            <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+          {% endif %}
+          <a href="{% url 'product_list_by_category' category_slug=cat.slug %}">{{ cat.name }}</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

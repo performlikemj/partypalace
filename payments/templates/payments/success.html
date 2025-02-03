@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h2>Thank You for Your Order!</h2>
+                    <p class="text-muted">Your order has been successfully placed.</p>
+                    {% if order %}
+                        <p>Order #{{ order.id }}</p>
+                    {% endif %}
+                    <p>We'll send you an email confirmation shortly.</p>
+                    <div class="mt-4">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'profile' %}" class="btn btn-primary">View Order Details</a>
+                        {% endif %}
+                        <a href="{% url 'product_list' %}" class="btn btn-outline-primary ms-2">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

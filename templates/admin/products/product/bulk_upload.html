@@ -1,0 +1,23 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div>
+    <h1>Bulk Upload Products</h1>
+    
+    <div class="module">
+        <h2>Upload Instructions</h2>
+        <ul>
+            <li>Prepare a CSV file with the following columns: name, slug, category, description, price, image_filename, background_color (optional), themes (optional), is_popular (optional)</li>
+            <li>Prepare a ZIP file containing all product images</li>
+            <li>The image_filename in the CSV should match exactly with the filename in the ZIP</li>
+        </ul>
+    </div>
+
+    <form action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Upload" class="default" style="float: none">
+    </form>
+</div>
+{% endblock %} 

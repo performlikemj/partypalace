@@ -1,0 +1,178 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-wrap="true">
+  <!-- Add carousel indicators -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    {% if popular_products %}
+      {% for product in popular_products %}
+        <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="{{ forloop.counter }}" aria-label="Slide {{ forloop.counter|add:'1' }}"></button>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="carousel-inner">
+    <!-- Slide 1: Featured Theme -->
+    {% if featured_theme %}
+      <div class="carousel-item active hero-slide" style="background-image: url('{% static 'img/banner.png' %}');">
+        <div class="hero-overlay d-flex flex-column justify-content-center align-items-center text-center">
+          <h1 class="hero-title">Featured Theme: {{ featured_theme.name }}</h1>
+          <p class="hero-subtitle">{{ featured_theme.description|default:"Party Supplies for a Legendary Birthday!" }}</p>
+          <a href="{% url 'theme_detail' featured_theme.slug %}" class="btn btn-primary hero-btn">
+            Shop {{ featured_theme.name }}
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <div class="carousel-item active hero-slide" style="background-image: url('{% static 'img/banner.png' %}');">
+        <div class="hero-overlay d-flex flex-column justify-content-center align-items-center text-center">
+          <h1 class="hero-title">Featured Collection</h1>
+          <p class="hero-subtitle">Party Supplies for a Legendary Birthday!</p>
+          <a href="#" class="btn btn-primary hero-btn">Shop Now</a>
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Additional Slides: Popular Products -->
+    {% if popular_products %}
+      {% for product in popular_products %}
+        <div class="carousel-item hero-slide" style="background-image: url('{% static 'img/banner.png' %}');">
+          <div class="hero-overlay">
+            <div class="product-content text-center">
+              {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="mb-4">
+              {% endif %}
+              <h2 class="hero-title">{{ product.name }}</h2>
+              <p class="hero-subtitle">${{ product.price }}</p>
+              <a href="{% url 'product_detail' product_slug=product.slug %}" class="btn btn-primary hero-btn">
+                View Product
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <!-- Carousel Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!-- Shop by Category -->
+<section class="categories-section">
+  <h2>Shop by Category</h2>
+  <div class="container">
+    <div class="row justify-content-center">
+      {% for cat in categories %}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4 d-flex justify-content-center">
+          <div class="category-circle" style="background-color: {{ cat.background_color }};">
+            {% if cat.image %}
+              <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+            {% endif %}
+            <a href="{% url 'product_list_by_category' category_slug=cat.slug %}">{{ cat.name }}</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Shop by Theme -->
+<section class="themes-section">
+  <h2>Shop by Theme</h2>
+  <div class="container">
+    <div class="row justify-content-center">
+      {% for t in themes %}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4 d-flex justify-content-center">
+          <div class="theme-circle">
+            {% if t.image %}
+              <img src="{{ t.image.url }}" alt="{{ t.name }}">
+            {% endif %}
+            <a href="{% url 'theme_detail' t.slug %}">{{ t.name }}</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Customer Reviews -->
+<section class="customer-reviews-section">
+    <h2 class="text-center mb-4">Check out what our customers are saying!</h2>
+    <div class="container">
+        <div class="row">
+            {% for review in approved_reviews %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title mb-0">{{ review.user.username }}</h5>
+                                <div class="text-warning">
+                                    {% for i in "12345"|make_list %}
+                                        {% if forloop.counter <= review.rating %}
+                                            <i class="fas fa-star"></i>
+                                        {% else %}
+                                            <i class="far fa-star"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% if review.image %}
+                                <img src="{{ review.image.url }}" alt="Review image" class="img-fluid mb-3" style="max-height: 200px; width: 100%; object-fit: cover;">
+                            {% endif %}
+                            <p class="card-text">{{ review.comment }}</p>
+                            <p class="card-text"><small class="text-muted">{{ review.created_at|date:"M d, Y" }}</small></p>
+                            <p class="card-text"><small class="text-muted">Purchased {{ review.product.name }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if approved_reviews.paginator.num_pages > 1 %}
+        <div class="d-flex justify-content-center mt-4">
+            <nav aria-label="Reviews pagination">
+                <ul class="pagination">
+                    {% if approved_reviews.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ approved_reviews.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in approved_reviews.paginator.page_range %}
+                        <li class="page-item {% if approved_reviews.number == num %}active{% endif %}">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if approved_reviews.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ approved_reviews.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Link to submit new reviews -->
+<div class="submit-review-link">
+  <a href="{% url 'submit_review' %}" class="btn btn-success">Leave a Review</a>
+</div>
+{% endblock %}

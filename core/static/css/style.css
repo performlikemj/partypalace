@@ -1,0 +1,959 @@
+/**********************************************
+ * GARDEN THEME COLORS
+ **********************************************/
+ :root {
+  --garden-dark: #2D6A4F;
+  --garden-medium: #40916C;
+  --garden-light: #95D5B2;
+  --garden-accent: #F56C6C; /* or #A7C957 for a green accent */
+  --garden-bg: #F8F9FA;
+  --garden-border: #DEE2E6;
+  --garden-hover: #E9ECEF;
+  --garden-text: #212529;
+}
+
+/**********************************************
+ * GLOBAL & BASE
+ **********************************************/
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--garden-bg);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-fluid {
+  flex: 1 0 auto;
+}
+
+h1, h2, h3, h4 {
+  margin: 0.5em 0;
+  font-weight: 700;
+  color: var(--garden-dark);
+}
+
+/* Override Bootstrap link underline */
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none !important;
+}
+
+/**********************************************
+ * HEADER & NAV
+ **********************************************/
+/* Top strip with logo, search, user, etc. */
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--garden-light);
+  padding: 0.5rem 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.banner-logo img {
+  max-height: 40px;
+  display: block;
+}
+
+.search-container {
+  display: flex;
+  flex: 1;
+  max-width: 400px;
+  margin: 0 1rem;
+}
+
+.search-box {
+  flex: 1;
+  padding: 0.4rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 9999px 0 0 9999px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.search-button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-radius: 0 9999px 9999px 0;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--garden-dark);
+}
+
+.search-button:hover {
+  background-color: var(--garden-light);
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  position: relative;
+  z-index: 1031; /* So cart/user can appear above background */
+}
+
+.header-icons a {
+  font-size: 1.2rem;
+  color: var(--garden-dark);
+}
+
+.header-icons a:hover {
+  color: var(--garden-medium);
+}
+
+/* Main nav bar (list) - optionally replaced by a Bootstrap .navbar */
+.main-menu {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  margin: 0;
+  padding: 0;
+}
+
+.main-menu > li {
+  position: relative;
+}
+
+.main-menu > li > a {
+  display: block;
+  padding: 15px 20px;
+  color: var(--garden-dark);
+  font-weight: bold;
+}
+
+.main-menu > li > a:hover {
+  background-color: #f1f1f1;
+  color: var(--garden-medium);
+}
+
+/* Default Bootstrap dropdown (click-based) */
+.dropdown-menu {
+  /* let Bootstrap handle the show/hide via .show class */
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  min-width: 180px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 999;
+}
+
+/* .dropdown-item styling is by Bootstrap */
+
+/**********************************************
+ * BUTTONS
+ **********************************************/
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: var(--garden-accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #d65252;
+}
+
+.btn-success {
+  background-color: var(--garden-medium);
+  color: #fff;
+}
+
+.btn-success:hover {
+  background-color: var(--garden-dark);
+}
+
+/**********************************************
+ * HERO / CAROUSEL
+ **********************************************/
+.hero-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.carousel-item {
+  height: 600px;  /* Fixed height for all slides */
+}
+
+.carousel-item .product-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.carousel-item img {
+  max-height: 350px;
+  width: auto;
+  object-fit: contain;
+}
+
+.hero-title {
+  color: #234F1E;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+}
+
+.hero-subtitle {
+  color: #446D37;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+.hero-btn {
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+}
+
+/**********************************************
+ * CATEGORY & THEME CIRCLES
+ **********************************************/
+.categories-section,
+.themes-section {
+  padding: 60px 15px;
+  text-align: center;
+}
+
+.category-circle,
+.theme-circle {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background-color: var(--garden-medium);
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-circle img,
+.theme-circle img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  opacity: 0.8;
+}
+
+.category-circle a,
+.theme-circle a {
+  position: absolute;
+  text-align: center;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0 5px;
+}
+
+.category-circle:hover,
+.theme-circle:hover {
+  background-color: var(--garden-dark);
+}
+
+.category-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  justify-items: center;
+}
+
+.categories-section {
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.categories-section h2 {
+  margin-bottom: 2rem;
+  color: var(--garden-dark);
+}
+
+/**********************************************
+ * PRODUCTS & PAGINATION
+ **********************************************/
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 0 1rem;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--garden-border);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  background-color: #fff;
+  height: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.product-card h3 {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  color: var(--garden-dark);
+}
+
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.pagination-link {
+  color: var(--garden-accent);
+  font-weight: bold;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--garden-border);
+  border-radius: 4px;
+}
+
+.pagination-link:hover {
+  background-color: var(--garden-hover);
+  text-decoration: none;
+}
+
+.pagination-info {
+  color: var(--garden-text);
+}
+
+/**********************************************
+ * FOOTER
+ **********************************************/
+.site-footer {
+  background-color: var(--garden-light);
+  color: var(--garden-dark);
+  padding: 2rem 1rem 1rem;
+  flex-shrink: 0;
+  margin-top: auto;
+  width: 100%;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-brand,
+.footer-col {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-logo {
+  max-width: 150px;
+  margin-bottom: 1rem;
+}
+
+.brand-desc {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.footer-col h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--garden-dark);
+}
+
+.footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-col li a {
+  display: block;
+  margin: 0.3rem 0;
+  color: var(--garden-dark);
+  text-decoration: none;
+}
+
+.footer-col li a:hover {
+  text-decoration: underline;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.newsletter-form input[type="email"] {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.footer-bottom {
+  border-top: 1px solid #ccc;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin: 0.3rem 0;
+}
+
+.footer-links a {
+  color: var(--garden-dark);
+  margin: 0 0.3rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-social a {
+  display: inline-block;
+  margin: 0 5px;
+  color: var(--garden-dark);
+  font-size: 1.2rem;
+}
+
+.footer-social a:hover {
+  color: var(--garden-medium);
+}
+
+/**********************************************
+ * REVIEWS & FORMS
+ **********************************************/
+.customer-reviews-section {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.customer-reviews-section h2 {
+  margin-bottom: 1.5rem;
+  color: var(--garden-dark);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  justify-items: center;
+}
+
+.review-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 350px;
+  text-align: left;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.review-card strong {
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.3rem;
+  color: var(--garden-dark);
+}
+
+.review-card p {
+  margin: 0.3rem 0;
+  color: #333;
+}
+
+.review-card .review-image img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.date-posted {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 0.5rem;
+}
+
+.submit-review-link {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.review-form-section {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+.review-form-container {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="file"],
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/**********************************************
+ * CAROUSEL / UTILS
+ **********************************************/
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.carousel-indicators {
+  bottom: 20px;
+}
+
+.carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.carousel-indicators button.active {
+  background-color: var(--garden-accent);
+}
+
+/**********************************************
+ * AUTH & PROFILE
+ **********************************************/
+/* If you have a nav-profile or authentication pages, keep relevant styles. */
+.nav-profile {
+  margin-left: auto;
+  padding: 0 1rem;
+}
+
+.nav-profile .fa-user-circle {
+  font-size: 1.5rem;
+  color: var(--garden-dark);
+}
+
+.nav-profile .dropdown-toggle::after {
+  display: none;
+}
+
+.nav-profile .dropdown-menu {
+  min-width: 200px;
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.nav-profile .dropdown-item {
+  padding: 0.5rem 1rem;
+  color: var(--garden-dark);
+}
+
+.nav-profile .dropdown-item:hover {
+  background-color: var(--garden-light);
+}
+
+/* Example auth card styling */
+.auth-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.auth-icon {
+  font-size: 3rem;
+  color: var(--garden-dark);
+  margin-bottom: 1rem;
+}
+
+.auth-title {
+  color: var(--garden-dark);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.auth-form label {
+  color: var(--garden-dark);
+  font-weight: 500;
+}
+
+.auth-form .form-control {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+}
+
+.auth-form .form-control:focus {
+  border-color: var(--garden-medium);
+  box-shadow: 0 0 0 0.2rem rgba(214, 82, 82, 0.25);
+}
+
+.auth-link {
+  color: var(--garden-dark);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-link:hover {
+  color: var(--garden-medium);
+}
+
+.btn-primary {
+  background-color: var(--garden-dark);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--garden-medium);
+  transform: translateY(-1px);
+}
+
+/* Login/Register form specifics */
+.login-card {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.login-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: var(--garden-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-icon i {
+  font-size: 2.5rem;
+  color: var(--garden-dark);
+}
+
+.login-card h2 {
+  color: var(--garden-dark);
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-form .form-floating {
+  position: relative;
+}
+
+.login-form .form-control {
+  height: 3.5rem;
+  padding: 1rem 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.login-form .form-control:focus {
+  border-color: var(--garden-medium);
+  box-shadow: 0 0 0 0.2rem rgba(var(--garden-medium-rgb), 0.15);
+}
+
+.login-form label {
+  padding: 1rem 0.75rem;
+  color: #666;
+}
+
+.btn-login {
+  background: var(--garden-dark);
+  color: white;
+  padding: 0.8rem;
+  border-radius: 10px;
+  font-weight: 500;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-login:hover {
+  background: var(--garden-medium);
+  transform: translateY(-1px);
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.link-primary {
+  color: var(--garden-dark);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-primary:hover {
+  color: var(--garden-medium);
+}
+
+.link-secondary {
+  color: #666;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.link-secondary:hover {
+  color: var(--garden-medium);
+}
+
+.help-text {
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  padding-left: 0.5rem;
+}
+
+.form-floating > .form-control {
+  height: calc(3.5rem + 2px);
+  line-height: 1.25;
+}
+
+.form-floating > label {
+  padding: 1rem 0.75rem;
+  color: #666;
+}
+
+/**********************************************
+ * CART DROPDOWN
+ **********************************************/
+.cart-dropdown {
+  width: 320px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 0;
+  margin-top: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  position: absolute;
+  right: 0;
+  top: 100%;
+}
+
+.cart-items-container {
+  max-height: 50vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.cart-items-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cart-items-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.cart-items-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.cart-item {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item:hover {
+  background-color: #f8f9fa;
+}
+
+.cart-item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.cart-summary {
+  position: sticky;
+  bottom: 0;
+  background-color: #fff;
+  border-top: 1px solid #dee2e6;
+  z-index: 1;
+}
+
+.dropdown-header {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1;
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* === ADDED RULES FOR HOVER + CLICK ON CART === */
+
+/* Force cart to remain open on hover: */
+.cart-dropdown-parent:hover .cart-dropdown {
+  display: block !important;  /* override "display: none" */
+}
+
+/* Also let Bootstrap's .show class keep it open on click: */
+.cart-dropdown-parent.dropdown.show .cart-dropdown {
+  display: block !important; 
+}
+
+/* If you want the user icon to behave similarly, 
+   add a 'user-dropdown-parent' class to that <div> and do:
+.user-dropdown-parent:hover .dropdown-menu {
+  display: block !important;
+}
+.user-dropdown-parent.dropdown.show .dropdown-menu {
+  display: block !important;
+}
+*/
+
+.team-image img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.team-card {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.policy-page {
+    background-color: #f8f9fa;
+    min-height: 80vh;
+}
+
+.policy-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #2c3e50;
+}
+
+.policy-content p {
+    margin-bottom: 1.5rem;
+}
+
+.policy-content h2 {
+    color: #234F1E;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.policy-content ul, 
+.policy-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.policy-content li {
+    margin-bottom: 0.5rem;
+}

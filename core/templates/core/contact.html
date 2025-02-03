@@ -1,0 +1,108 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="contact-page">
+    <!-- Hero Section -->
+    <div class="hero-section bg-light py-5">
+        <div class="container text-center">
+            <h1 class="display-4 mb-3">{{ contact.title }}</h1>
+            <p class="lead text-muted">{{ contact.subtitle }}</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row g-4">
+            <!-- Contact Information -->
+            <div class="col-lg-4">
+                <div class="contact-info card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Get in Touch</h3>
+                        
+                        <div class="mb-4">
+                            <h5><i class="fas fa-map-marker-alt me-2"></i>Address</h5>
+                            <p>{{ contact.address|linebreaks }}</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5><i class="fas fa-envelope me-2"></i>Email</h5>
+                            <p><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5><i class="fas fa-phone me-2"></i>Phone</h5>
+                            <p><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5><i class="fas fa-clock me-2"></i>Business Hours</h5>
+                            <p>{{ contact.business_hours|linebreaks }}</p>
+                        </div>
+
+                        {% if contact.facebook or contact.instagram or contact.twitter %}
+                        <div class="social-links">
+                            <h5>Follow Us</h5>
+                            <div class="d-flex gap-3">
+                                {% if contact.facebook %}
+                                <a href="{{ contact.facebook }}" class="text-dark fs-4"><i class="fab fa-facebook"></i></a>
+                                {% endif %}
+                                {% if contact.instagram %}
+                                <a href="{{ contact.instagram }}" class="text-dark fs-4"><i class="fab fa-instagram"></i></a>
+                                {% endif %}
+                                {% if contact.twitter %}
+                                <a href="{{ contact.twitter }}" class="text-dark fs-4"><i class="fab fa-twitter"></i></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Send us a Message</h3>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" name="name" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" name="email" class="form-control" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Subject</label>
+                                    <input type="text" name="subject" class="form-control" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Message</label>
+                                    <textarea name="message" class="form-control" rows="5" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if contact.map_embed_code %}
+        <!-- Map Section -->
+        <div class="map-section mt-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-0">
+                    {{ contact.map_embed_code|safe }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

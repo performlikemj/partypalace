@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="review-form-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">
+                            {% if product %}
+                                Review for {{ product.name }}
+                            {% else %}
+                                Leave a Review
+                            {% endif %}
+                        </h2>
+                        <form method="POST" enctype="multipart/form-data" class="review-form">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <div class="form-group mb-3">
+                                    {{ field.label_tag }}
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        <div class="alert alert-danger">
+                                            {{ field.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit Review</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

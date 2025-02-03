@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="login-card">
+                <div class="text-center mb-4">
+                    <div class="login-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h2>Create Account</h2>
+                    <p class="text-muted">Join our garden party community</p>
+                </div>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} mb-4">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post" class="login-form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-floating mb-3">
+                            {{ field|add_class:"form-control" }}
+                            <label>{{ field.label }}</label>
+                            {% if field.errors %}
+                                <div class="error-message">
+                                    {{ field.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                            {% if field.help_text %}
+                                <div class="help-text">
+                                    {{ field.help_text }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-login w-100">Register</button>
+                </form>
+
+                <div class="text-center mt-4">
+                    <p>Already have an account? <a href="{% url 'login' %}" class="link-primary">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

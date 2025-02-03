@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-4">
+  <h2 class="text-center mb-4" style="color:#2D6A4F;">All Themes</h2>
+  
+  <div class="row justify-content-center">
+    {% for theme in page_obj %}
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4 d-flex justify-content-center">
+        <div class="theme-circle">
+          {% if theme.image %}
+            <img src="{{ theme.image.url }}" alt="{{ theme.name }}">
+          {% endif %}
+          <a href="{% url 'theme_detail' theme.slug %}">{{ theme.name }}</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="pagination text-center">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
